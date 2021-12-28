@@ -3,13 +3,11 @@ package com.example.RCCDetailing.api;
 import com.example.RCCDetailing.model.Structure;
 import com.example.RCCDetailing.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("api/v1/upload")
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 public class FileUploadController {
     @Autowired
     FileUploadService fileUploadService;
