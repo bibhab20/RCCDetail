@@ -35,4 +35,5 @@ public abstract class AbstractStructure {
             this.columns.add((Column) segment);
         }
     }
+
 }

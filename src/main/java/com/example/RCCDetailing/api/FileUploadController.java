@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("api/v1/upload")
 @RestController
-@CrossOrigin(origins = {"https://rccdetaillingfront.herokuapp.com/","http://localhost:3000/"})
+@CrossOrigin(origins = {"http://rccdetaillingfront.herokuapp.com/","http://localhost:3000/","https://rccdetaillingfront.herokuapp.com/"})
 public class FileUploadController {
     @Autowired
     FileUploadService fileUploadService;
     @PostMapping
     public Structure uploadFile(@RequestParam("file") MultipartFile file){
+        System.out.println("inside file upload controller");
         return fileUploadService.uploadFile(file);
     }
 }
