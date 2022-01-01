@@ -76,7 +76,7 @@ public class BeamParser {
         TopReinforcement topReinforcement = new TopReinforcement();
         topReinforcement.setStart(Math.max(Double.parseDouble(values[1]),Double.parseDouble(values[2])));
         topReinforcement.setMid(Math.max(Double.parseDouble(values[3]),Double.parseDouble(values[4])));
-        topReinforcement.setMid(Double.parseDouble(values[5]));
+        topReinforcement.setEnd(Double.parseDouble(values[5]));
         return topReinforcement;
 
     }
