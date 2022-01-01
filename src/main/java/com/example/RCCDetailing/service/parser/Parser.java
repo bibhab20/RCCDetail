@@ -9,45 +9,24 @@ import java.util.Map;
 public class Parser extends AbstractParser{
     @Override
     public AbstractStructure getStructure(String text) {
-        System.out.println("inside parser");
         AbstractStructure structure = new Structure();
         List<String> sections = getSegmentSections(text);
         SimpleSegmentParser segmentParser = new SimpleSegmentParser();
         List<Segment> segments = new ArrayList<>();
         //incidence parsing
-        System.out.println("before incident parsing");
         List<List<String>> jointCoordinateAndMemberIncidenceLines = getIncidenceAndMemberLines(text);
         List<String> jointCoordinateLines = jointCoordinateAndMemberIncidenceLines.get(0);
         List<String> memberIncidenceLines = jointCoordinateAndMemberIncidenceLines.get(1);
 
-        //for testing purpose only
-       /* System.out.println("JointCoordinate lines");
-        for(String line: jointCoordinateLines){
-            System.out.println(line);
-        }
-
-        System.out.println("memberIncidence lines");
-        for(String line: memberIncidenceLines){
-            System.out.println(line);
-        }*/
 
         NodeParser nodeParser = new NodeParser();
         List<Node> nodes = nodeParser.parseNodes(jointCoordinateLines);
-        for(Node node: nodes){
-            if(node == null){
-                System.out.println(" null node found");
-            }
-            else{
-                System.out.println(node.getNodeNumber());
-            }
-        }
+
 
         IncidenceParser incidenceParser = new IncidenceParser();
         Map<Integer, Incidence> incidenceMap = incidenceParser.parseIncidence(memberIncidenceLines, nodes);
 
-        for (Map.Entry<Integer, Incidence> entry: incidenceMap.entrySet()){
-            System.out.println("id: "+entry.getKey()+ "start node id"+ entry.getValue().getStart().getNodeNumber());
-        }
+
 
         //mapping incidence to structure
 
@@ -83,7 +62,6 @@ public class Parser extends AbstractParser{
     }
 
     private List<List<String>> getIncidenceAndMemberLines(String text){
-        System.out.println("inside getIncidenceAndMemberLines method");
         List<String> jointCoordinateLines = new ArrayList<>();
         List<String> memberIncidenceLines = new ArrayList<>();
         String[] ar = text.split("\n");
@@ -91,8 +69,6 @@ public class Parser extends AbstractParser{
         while(startIndex<ar.length && !ar[startIndex].contains("JOINT COORDINATES")){
             startIndex++;
         }
-        System.out.println("after join coordinate start index");
-        System.out.println(ar[startIndex]);
         startIndex++;
         while(startIndex < ar.length && !ar[startIndex].contains("MEMBER")){
 

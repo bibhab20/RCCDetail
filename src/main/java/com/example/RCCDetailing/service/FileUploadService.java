@@ -3,6 +3,8 @@ package com.example.RCCDetailing.service;
 import com.example.RCCDetailing.model.Beam;
 import com.example.RCCDetailing.model.Column;
 import com.example.RCCDetailing.model.Structure;
+import com.example.RCCDetailing.model.StructureResponse;
+import com.example.RCCDetailing.service.analysis.ColumnLineAnalyzer;
 import com.example.RCCDetailing.service.parser.Parser;
 
 import org.springframework.stereotype.Service;
@@ -13,7 +15,7 @@ import java.util.List;
 
 @Service
 public class FileUploadService {
-    public Structure  uploadFile(MultipartFile file) {
+    public StructureResponse  uploadFile(MultipartFile file) {
         String text ="";
         try {
             InputStream inputStream = file.getInputStream();
@@ -29,6 +31,8 @@ public class FileUploadService {
         }
         Parser parser = new Parser();
         Structure structure = (Structure) parser.getStructure(text);
-        return structure;
+        ColumnLineAnalyzer columnLineAnalyzer = new ColumnLineAnalyzer();
+        StructureResponseAdapter responseAdapter = new StructureResponseAdapter();
+        return responseAdapter.getStructureResponse(structure,columnLineAnalyzer.getColumnLines(structure));
     }
 }

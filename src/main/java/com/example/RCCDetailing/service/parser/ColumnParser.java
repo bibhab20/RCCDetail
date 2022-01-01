@@ -128,9 +128,8 @@ public class ColumnParser {
                 break;
             }
         }
-        //System.out.println(line);
-        int len = line.split("\\s++").length;
 
+        int len = line.split("\\s++").length;
         return Double.parseDouble(line.split("\\s++")[4]);
     }
 }
