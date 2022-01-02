@@ -35,6 +35,7 @@ public class BeamParser {
 
         beam.setMainReinforcementGrade(getMainReinforcement(section));
         beam.setShearReinforcement(getShearReinforcement(section));
+        beam.setShearReinforcementGrade(getShearReinforcementGrade());
 
         return beam;
     }
@@ -144,7 +145,6 @@ public class BeamParser {
                 break;
             }
         }
-
         List<StirreupSpecification> list = new ArrayList<>();
         String[] ar = line1.split("\\s++");
         for(int i=1; i<ar.length; i++){
