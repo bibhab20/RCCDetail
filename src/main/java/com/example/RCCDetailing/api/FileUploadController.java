@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("api/v1/upload")
 @RestController
-@CrossOrigin(origins = {"http://rccdetaillingfront.herokuapp.com/","http://localhost:3000/","https://rccdetaillingfront.herokuapp.com/"})
+@CrossOrigin(origins = {"http://rccdetaillingfront.herokuapp.com/","http://localhost:3000/","https://rccdetailling-frontend.herokuapp.com/"})
 public class FileUploadController {
     @Autowired
     FileUploadService fileUploadService;
