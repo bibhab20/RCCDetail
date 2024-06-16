@@ -1,10 +1,11 @@
 package com.example.RCCDetailing.service.util;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.*;
 import java.util.Properties;
 
+@Slf4j
 public class ParseUtil {
     private static ParseUtil instance;
     private ParseUtil(){
@@ -16,19 +17,18 @@ public class ParseUtil {
         return instance;
     }
     public Properties getProperties() {
-        FileInputStream fileInputStream = null;
-        try {
-
-            fileInputStream = new FileInputStream("src/main/resources/application.properties");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
         Properties properties = new Properties();
-        try {
-            properties.load(fileInputStream);
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("application.properties")) {
+            if (inputStream != null) {
+                properties.load(inputStream);
+            } else {
+                throw new FileNotFoundException("Property file 'application.properties' not found in the classpath");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return properties;
     }
+
+
 }
